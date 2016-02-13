@@ -1,4 +1,4 @@
-import SignalApp
+import Page.BasicSignal as BasicSignal
 
 main =
-  SignalApp.app
+  BasicSignal.app

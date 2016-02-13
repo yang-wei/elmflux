@@ -1,9 +1,9 @@
-module Note (signalNote) where
+module Component.Note (signalNote) where
 
 import Text
 import Graphics.Element as Element exposing (Element)
 
-import Size exposing (seriesWidth, seriesHeight, seriesLabelWidth, seriesValueWidth)
+import Component.Size exposing (seriesWidth, seriesHeight, seriesLabelWidth, seriesValueWidth)
 
 {- Even the note need to be a Signal
    Because at the top level we want to mapMany

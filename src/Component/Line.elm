@@ -1,4 +1,4 @@
-module Line (toStreamLine) where
+module Component.Line (toStreamLine) where
 
 import Graphics.Collage exposing (..)
 import Graphics.Element exposing (..)
@@ -7,8 +7,8 @@ import List
 import Text
 import Mouse
 
-import Size exposing (seriesWidth, seriesHeight)
-import ShareColor exposing (elmBlue, white)
+import Component.Size exposing (seriesWidth, seriesHeight)
+import Component.ShareColor exposing (elmBlue, white)
 
 type Action a
   = TimeSignal

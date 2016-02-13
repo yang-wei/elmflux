@@ -1,4 +1,4 @@
-module ShareColor(elmBlue, white) where
+module Component.ShareColor(elmBlue, white) where
 
 import Color exposing (rgb)
 

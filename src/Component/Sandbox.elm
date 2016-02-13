@@ -1,4 +1,4 @@
-module Sandbox (simpleSignalSandbox, displaySimpleSandbox) where 
+module Component.Sandbox (simpleSignalSandbox, displaySimpleSandbox) where 
 
 import Signal exposing (..)
 import Signal.Extra as Extra
@@ -11,8 +11,8 @@ import Color
 import List
 
 -- COMPONENT
-import Line exposing (toStreamLine)
-import Size exposing (seriesHeight, seriesLabelWidth, seriesValueWidth)
+import Component.Line exposing (toStreamLine)
+import Component.Size exposing (seriesHeight, seriesLabelWidth, seriesValueWidth)
 
 {-- A component that display signal. For eg:
   Mouse.clicks ---------()----------()---------------> ()

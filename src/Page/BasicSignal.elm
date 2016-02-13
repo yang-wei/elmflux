@@ -1,4 +1,4 @@
-module SignalApp (app) where 
+module Page.BasicSignal (app) where 
 
 import Signal.Extra as Extra
 import Graphics.Element as Element exposing (Element, flow, down)
@@ -7,8 +7,8 @@ import Mouse exposing (clicks)
 import Window
 
 -- COMPONENT
-import Sandbox exposing (simpleSignalSandbox, displaySimpleSandbox)
-import Note exposing (signalNote)
+import Component.Sandbox exposing (simpleSignalSandbox, displaySimpleSandbox)
+import Component.Note exposing (signalNote)
 
 app : Signal Element
 app =
