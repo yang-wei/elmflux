@@ -3,12 +3,12 @@ module Line (toStreamLine) where
 import Graphics.Collage exposing (..)
 import Graphics.Element exposing (..)
 import Time
-import Color exposing (rgb)
 import List
 import Text
 import Mouse
 
 import Size exposing (seriesWidth, seriesHeight)
+import ShareColor exposing (elmBlue, white)
 
 type Action a
   = TimeSignal
@@ -22,9 +22,9 @@ type alias Box = {
 initBox x value =
   Box x value
 
-delta = Signal.map Time.inSeconds (Time.fps 45)
+delta = Signal.map Time.inSeconds (Time.fps 30)
 
-(pointWidth, pointHeight) = (15, 15)
+(pointWidth, pointHeight) = (20, 20)
 startPoint = pointWidth - (seriesWidth / 2)
 
 objectMoveX : Float -> Form -> Form
@@ -47,8 +47,8 @@ makeBox x value =
 
 initialSeries = []
 
-moveXAsTimePassed point =
-  { point | x = point.x + (30 * 0.15) }
+moveXAsTimePassed box =
+  { box | x = box.x + (30 * 0.15) }
 
 toStreamLine : (String -> String) -> Signal a -> Signal Element
 toStreamLine f signal =
@@ -104,9 +104,3 @@ timeAxis =
     axis = path [(startPoint, 0), (seriesWidth, 0)]
   in
     traced defaultLine axis
-
-elmBlue =
-  rgb 96 181 204
-
-white =
-  rgb 255 255 255
