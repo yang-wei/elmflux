@@ -3,8 +3,10 @@ module Page.BasicSignal (app) where
 import Signal.Extra as Extra
 import Graphics.Element as Element exposing (Element, flow, down)
 
-import Mouse exposing (clicks)
+import Mouse
 import Window
+import Keyboard
+import Time
 
 -- COMPONENT
 import Component.Sandbox exposing (simpleSignalSandbox, displaySimpleSandbox)
@@ -17,14 +19,16 @@ app =
     , mouseClicksSignalNote
     , windowDimensionsSignal
     , windowDimensionsSignalNote
-    , filterSignal
+    , keyboardArrowsSignal
+    , keyboardWasdSignal
+    , keyboardSignalNote
+    , timeSignal
+    , timeSignalNote
     ]
 
 mouseClicksSignal : Signal Element
 mouseClicksSignal =
-  displaySimpleSandbox [
-    ( Mouse.clicks, "Mouse.clicks" )
-  ]
+  displaySimpleSandbox [ ( Mouse.clicks, "Mouse.clicks" ) ]
 
 mouseClicksSignalNote : Signal Element
 mouseClicksSignalNote =
@@ -32,21 +36,28 @@ mouseClicksSignalNote =
 
 windowDimensionsSignal : Signal Element
 windowDimensionsSignal =
-  displaySimpleSandbox [
-    ( Window.dimensions, "Window.dimensions" )
-  ]
+  displaySimpleSandbox [ ( Window.dimensions, "Window.dimensions" ) ]
 
 windowDimensionsSignalNote : Signal Element
 windowDimensionsSignalNote =
   signalNote "Might be a bit verbose but why don't you try it out by resizing window."
 
-{- when x,y of Window.dimensions are even number -}
-evenWindowDimensionsSignal =
-  Signal.filter (\(x, y) -> if x % 2 == 0 && y % 2 == 0 then True else False) (0, 0) Window.dimensions
+keyboardArrowsSignal : Signal Element
+keyboardArrowsSignal =
+  displaySimpleSandbox [ ( Keyboard.arrows, "Keyboard.arrows" ) ]
 
-filterSignal : Signal Element
-filterSignal =
-  displaySimpleSandbox
-  [ ( Window.dimensions,  "Window.dimensions")
-  , ( evenWindowDimensionsSignal, "evenWindowDimensionsSignal")
-  ]
+keyboardWasdSignal : Signal Element
+keyboardWasdSignal =
+  displaySimpleSandbox [ ( Keyboard.wasd, "Keyboard.wasd") ]
+
+keyboardSignalNote : Signal Element
+keyboardSignalNote =
+  signalNote "Press on any arrows or wsad key on your keyboard. You will notice the duplicated code. We will learn to fix this later."
+
+timeSignal : Signal Element
+timeSignal =
+  displaySimpleSandbox [ ( (Time.every Time.second), "Time.every Time.second") ]
+
+timeSignalNote : Signal Element
+timeSignalNote =
+  signalNote "The clock is ticking... Showing current time in unix timestamp."
