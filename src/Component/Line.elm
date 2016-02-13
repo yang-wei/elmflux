@@ -48,7 +48,7 @@ makeBox x value =
 initialSeries = []
 
 moveXAsTimePassed box =
-  { box | x = box.x + (30 * 0.15) }
+  { box | x = box.x + (pointWidth * 0.2) }
 
 toStreamLine : (String -> String) -> Signal a -> Signal Element
 toStreamLine f signal =
