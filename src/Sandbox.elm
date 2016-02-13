@@ -1,4 +1,4 @@
-module Sandbox (simpleSignalSandbox) where 
+module Sandbox (simpleSignalSandbox, displaySimpleSandbox) where 
 
 import Signal exposing (..)
 import Signal.Extra as Extra
@@ -8,9 +8,11 @@ import Graphics.Element as Element exposing (Element, show, flow , up, down, lef
 import String
 import Text
 import Color
+import List
 
 -- COMPONENT
-import Stream exposing (toStreamLine)
+import Line exposing (toStreamLine)
+import Size exposing (seriesHeight, seriesLabelWidth, seriesValueWidth)
 
 {-- A component that display signal. For eg:
   Mouse.clicks ---------()----------()---------------> ()
@@ -25,32 +27,42 @@ signalSandbox signal f signalName =
                              , signalValue signal
                              ]
 
+displaySimpleSandbox signals =
+  let
+    sandboxes =
+      List.map (\(signal, name) -> simpleSignalSandbox signal name) signals
+  in
+    Extra.mapMany (flow down) sandboxes
+
 simpleSignalSandbox : Signal a -> String -> Signal Element
 simpleSignalSandbox signal signalName =
   signalSandbox signal identity signalName
 
--- For e.g Mouse.clicks
+-- For e.g: Mouse.clicks
 signalLabel : String -> Signal Element
 signalLabel name =
       let
-        format name =
+        displayName =
           Text.fromString name
           |> Text.monospace
           |> Element.rightAligned
           |> Element.width 200
           |> Element.color (Color.rgb 255 255 255)
+        labelContainer =
+          container seriesLabelWidth seriesHeight middle displayName
       in
-        Signal.constant (format name)
+        Signal.constant labelContainer
 
--- For e.g ()
+-- For e.g: ()
 signalValue : Signal a -> Signal Element
 signalValue value =
   let
-    format str =
-      toString str
+    display value =
+      container seriesValueWidth seriesHeight middle
+      (toString value
       |> Text.fromString
       |> Text.monospace
       |> Element.leftAligned
-      |> Element.width 200
+      |> Element.width 200)
   in
-    Signal.map format value
+    Signal.map display value

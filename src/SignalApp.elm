@@ -7,7 +7,7 @@ import Mouse exposing (clicks)
 import Window
 
 -- COMPONENT
-import Sandbox exposing (simpleSignalSandbox)
+import Sandbox exposing (simpleSignalSandbox, displaySimpleSandbox)
 import Note exposing (signalNote)
 
 app : Signal Element
@@ -16,13 +16,15 @@ app =
     [ mouseClicksSignal
     , mouseClicksSignalNote
     , windowDimensionsSignal
+    , windowDimensionsSignalNote
     , filterSignal
     ]
 
 mouseClicksSignal : Signal Element
 mouseClicksSignal =
-  Extra.mapMany (flow down)
-  [ simpleSignalSandbox Mouse.clicks "Mouse.clicks" ]
+  displaySimpleSandbox [
+    ( Mouse.clicks, "Mouse.clicks" )
+  ]
 
 mouseClicksSignalNote : Signal Element
 mouseClicksSignalNote =
@@ -30,8 +32,13 @@ mouseClicksSignalNote =
 
 windowDimensionsSignal : Signal Element
 windowDimensionsSignal =
-  Extra.mapMany (flow down)
-  [ simpleSignalSandbox Window.dimensions "Window.dimensions" ]
+  displaySimpleSandbox [
+    ( Window.dimensions, "Window.dimensions" )
+  ]
+
+windowDimensionsSignalNote : Signal Element
+windowDimensionsSignalNote =
+  signalNote "Might be a bit verbose but why don't you try it out by resizing window."
 
 {- when x,y of Window.dimensions are even number -}
 evenWindowDimensionsSignal =
@@ -39,7 +46,7 @@ evenWindowDimensionsSignal =
 
 filterSignal : Signal Element
 filterSignal =
-  Extra.mapMany (flow down)
-  [ simpleSignalSandbox Window.dimensions "Window.dimensions"
-  , simpleSignalSandbox evenWindowDimensionsSignal "evenWindowDimensionsSignal"
+  displaySimpleSandbox
+  [ ( Window.dimensions,  "Window.dimensions")
+  , ( evenWindowDimensionsSignal, "evenWindowDimensionsSignal")
   ]
