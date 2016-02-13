@@ -44,7 +44,6 @@ signalLabel name =
       let
         displayName =
           Text.fromString name
-          |> Text.monospace
           |> Element.rightAligned
           |> Element.width 200
           |> Element.color (Color.rgb 255 255 255)
@@ -61,7 +60,6 @@ signalValue value =
       container seriesValueWidth seriesHeight middle
       (toString value
       |> Text.fromString
-      |> Text.monospace
       |> Element.leftAligned
       |> Element.width 200)
   in
