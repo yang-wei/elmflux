@@ -52,7 +52,7 @@ keyboardWasdSignal =
 
 keyboardSignalNote : Signal Element
 keyboardSignalNote =
-  signalNote "Press on any arrows or wsad key on your keyboard. You will notice the duplicated code. We will learn to fix this later."
+  signalNote "Press on any arrows or wsad key on your keyboard. You will notice the duplicated code if you release key immediately. We will learn to fix this later."
 
 timeSignal : Signal Element
 timeSignal =
