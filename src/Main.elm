@@ -10,7 +10,7 @@ import Debug
 import Task
 
 import Page.BasicSignal as BasicSignal
-import Page.BasicSignal2 as BasicSignal2
+import Page.TimeSignal as TimeSignal
 
 navbar : Html
 navbar = 

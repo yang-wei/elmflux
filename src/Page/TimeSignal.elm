@@ -1,4 +1,4 @@
-module Page.BasicSignal2 (app) where 
+module Page.TimeSignal (app) where 
 
 import Signal.Extra as Extra
 import Graphics.Element as Element exposing (Element, flow, down)
