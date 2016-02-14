@@ -25,21 +25,24 @@ signalNavbar : Signal Element
 signalNavbar = 
   Signal.constant (toElement 150 50 navbar)
 
-routingElement = Signal.map routing signals
+routingElement : Signal Element
+routingElement = Signal.map2 routing hashSignal pageSignals
 
+main : Signal Element
 main =
   Extra.mapMany (flow right)
   [ signalNavbar
   , routingElement
   ]
 
-signals : Signal (String, Element, Element)
-signals = Signal.map3 (,,) 
-          (Signal.map (Debug.log "hash") hash)
+pageSignals : Signal (Element, Element)
+pageSignals = Signal.map2 (,)
           BasicSignal.app
-          BasicSignal2.app
- 
-routing (pagePath, basicSignal, timeSignal) =
+          TimeSignal.app
+
+hashSignal = Signal.map (Debug.log "hash") hash
+
+routing pagePath (basicSignal, timeSignal) =
   let
     allPage =
       match [ "" :-> always basicSignal
