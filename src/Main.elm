@@ -1,6 +1,6 @@
 import Router exposing (match, Route, (:->))
 
-import Signal.Extra as Extra
+import Signal.Extra as Extra exposing ((<~), (~))
 
 import Graphics.Element as Element exposing (Element, flow, right)
 import Html exposing (button, text, Html, div, a, ul, li, h1, toElement)
@@ -35,10 +35,14 @@ main =
   , routingElement
   ]
 
-pageSignals : Signal (Element, Element)
-pageSignals = Signal.map2 (,)
-          BasicSignal.app
-          TimeSignal.app
+pageInfo =
+  [ (BasicSignal.app, "basicSignal")
+  , (TimeSignal.app, "timeSignal")
+  ]
+
+pageSignals =
+  (,) <~ BasicSignal.app
+       ~ TimeSignal.app
 
 hashSignal = Signal.map (Debug.log "hash") hash
 
