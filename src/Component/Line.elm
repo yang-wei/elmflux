@@ -85,6 +85,11 @@ view series =
       , timeAxisArrow
       ] ++ boxes )
 
+axisLineStyle = 
+  { defaultLine
+    | width = 1.5
+  }
+
 timeAxisArrow : Form
 timeAxisArrow =
   let
@@ -95,14 +100,14 @@ timeAxisArrow =
                 , (arrowWingPointX, -5)
                 ]
   in
-    traced defaultLine axis
+    traced axisLineStyle axis
 
 timeAxis : Form
 timeAxis =
   let
     axis = path [(startPoint, 0), (seriesWidth, 0)]
   in
-    traced defaultLine axis
+    traced axisLineStyle axis
 
 timeAxisTick : Form
 timeAxisTick =
@@ -111,4 +116,4 @@ timeAxisTick =
                 , (startPoint, -5)
                 ]
   in
-    traced defaultLine axis
+    traced axisLineStyle axis

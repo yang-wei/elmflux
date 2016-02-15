@@ -15,14 +15,11 @@ signalNote notes =
 toElement : String -> Element
 toElement str =
   let
-    totalWidth = 
-      seriesWidth
-    
+    totalWidth = seriesWidth
     textElement = 
       Text.fromString str
         |> Text.height 20
         |> Text.typeface ["Source Sans Pro", "sans-serif"]
         |> Element.justified
-  
   in
     Element.container totalWidth seriesHeight Element.middle textElement
