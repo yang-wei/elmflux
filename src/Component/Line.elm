@@ -25,7 +25,7 @@ initBox x value =
 delta = Signal.map Time.inSeconds (Time.fps 30)
 
 (pointWidth, pointHeight) = (20, 20)
-startPoint = pointWidth - (seriesWidth / 2)
+startPoint = negate (seriesWidth / 2)
 
 objectMoveX : Float -> Form -> Form
 objectMoveX x shape =
@@ -58,7 +58,7 @@ transformIntoLine f signal=
   let
     action =
       Signal.merge (Signal.map Action signal) (Signal.map (always TimeSignal) delta)
-    
+
     update action series =
       case action of
         TimeSignal ->
@@ -80,11 +80,10 @@ view series =
     boxes = List.map (\{x, value} -> makeBox x value) series
   in
   collage seriesWidth seriesHeight
-    ([ rect seriesWidth seriesHeight
-        |> filled white
-    , timeAxis
-    , timeAxisArrow
-    ] ++ boxes )
+    ([ timeAxisTick
+      , timeAxis
+      , timeAxisArrow
+      ] ++ boxes )
 
 timeAxisArrow : Form
 timeAxisArrow =
@@ -102,5 +101,14 @@ timeAxis : Form
 timeAxis =
   let
     axis = path [(startPoint, 0), (seriesWidth, 0)]
+  in
+    traced defaultLine axis
+
+timeAxisTick : Form
+timeAxisTick =
+  let
+    axis = path [ (startPoint, 5)
+                , (startPoint, -5)
+                ]
   in
     traced defaultLine axis

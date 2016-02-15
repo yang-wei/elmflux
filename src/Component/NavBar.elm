@@ -8,7 +8,9 @@ navbar : Html
 navbar = 
         div [] 
         [ ul []
-             [ li [] [ a [href "#/basicSignal" ] [text "Basic Signals" ] ] 
+             [ li [] [ a [href "#/mouseSignal" ] [text "Mouse Signals" ] ]
+             , li [] [ a [href "#/keyboardSignal" ] [text "Keyboard Signals" ] ] 
+             , li [] [ a [href "#/windowSignal" ] [text "Window Signals" ] ] 
              , li [] [ a [href "#/timeSignal" ] [text "Time Signals" ] ] 
              ]
         ]

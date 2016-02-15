@@ -3,7 +3,7 @@ module Component.Note (signalNote) where
 import Text
 import Graphics.Element as Element exposing (Element)
 
-import Component.Size exposing (seriesWidth, seriesHeight, seriesLabelWidth, seriesValueWidth)
+import Component.Size exposing (seriesWidth, seriesHeight, seriesValueWidth)
 
 {- Even the note need to be a Signal
    Because at the top level we want to mapMany
@@ -16,10 +16,12 @@ toElement : String -> Element
 toElement str =
   let
     totalWidth = 
-      seriesLabelWidth + seriesWidth + seriesValueWidth
+      seriesWidth
     
     textElement = 
       Text.fromString str
+        |> Text.height 20
+        |> Text.typeface ["Source Sans Pro", "sans-serif"]
         |> Element.justified
   
   in

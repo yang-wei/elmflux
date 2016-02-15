@@ -2,7 +2,7 @@ module Component.Sandbox (simpleSignalSandbox, displaySimpleSandbox) where
 
 import Signal exposing (..)
 import Signal.Extra as Extra
-import Graphics.Element as Element exposing (Element, show, flow , up, down, left, right, justified, beside, container, middle)
+import Graphics.Element as Element exposing (Element, show, flow, up, down, left, right, justified, beside, container, middle)
 
 -- STYLING
 import String
@@ -12,7 +12,7 @@ import List
 
 -- COMPONENT
 import Component.Line exposing (toStreamLine)
-import Component.Size exposing (seriesHeight, seriesLabelWidth, seriesValueWidth)
+import Component.Size exposing (seriesHeight, seriesWidth, seriesValueWidth)
 
 {-- A component that display signal. For eg:
   Mouse.clicks ---------()----------()---------------> ()
@@ -22,10 +22,15 @@ import Component.Size exposing (seriesHeight, seriesLabelWidth, seriesValueWidth
 
 signalSandbox : Signal a -> (String -> String) -> String -> Signal Element
 signalSandbox signal f signalName = 
-  Extra.mapMany (flow right) [ signalLabel signalName
-                             , toStreamLine f signal
-                             , signalValue signal
-                             ]
+  let
+    topDisplay =
+      signalLabel signalName
+    bottomDisplay =
+      Extra.mapMany (flow right)
+      [ toStreamLine f signal
+      , signalValue signal ]
+  in
+    Extra.mapMany (flow down) [ topDisplay, bottomDisplay ]
 
 displaySimpleSandbox signals =
   let
@@ -44,13 +49,11 @@ signalLabel name =
       let
         displayName =
           Text.fromString name
-          |> Element.rightAligned
-          |> Element.width 200
+          |> Element.leftAligned
+          |> Element.width (seriesWidth + seriesValueWidth)
           |> Element.color (Color.rgb 255 255 255)
-        labelContainer =
-          container seriesLabelWidth seriesHeight middle displayName
       in
-        Signal.constant labelContainer
+        Signal.constant displayName
 
 -- For e.g: ()
 signalValue : Signal a -> Signal Element
@@ -60,7 +63,7 @@ signalValue value =
       container seriesValueWidth seriesHeight middle
       (toString value
       |> Text.fromString
-      |> Element.leftAligned
-      |> Element.width 200)
+      |> Element.justified
+      |> Element.width seriesValueWidth)
   in
     Signal.map display value
