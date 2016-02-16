@@ -75,6 +75,8 @@ transformIntoLine f signal=
   in
     Signal.foldp update initialSeries action
 
+
+-- VIEW
 view series =
   let
     boxes = List.map (\{x, value} -> makeBox x value) series
