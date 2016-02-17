@@ -3,7 +3,7 @@ module Component.Note (signalNote, emptySpace) where
 import Text
 import Graphics.Element as Element exposing (Element)
 
-import Component.Size exposing (seriesWidth, seriesHeight, seriesValueWidth)
+import Config.Size exposing (seriesWidth, seriesHeight, seriesValueWidth)
 
 {- Even the note need to be a Signal
    Because at the top level we want to mapMany

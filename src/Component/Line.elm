@@ -7,8 +7,8 @@ import List
 import Text
 import Mouse
 
-import Component.Size exposing (seriesWidth, seriesHeight)
-import Component.ShareColor exposing (elmBlue, white)
+import Config.Size exposing (seriesWidth, seriesHeight)
+import Config.Color exposing (elmBlue, white)
 
 type Action a
   = TimeSignal

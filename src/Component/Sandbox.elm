@@ -12,7 +12,7 @@ import List
 
 -- COMPONENT
 import Component.Line exposing (toStreamLine)
-import Component.Size exposing (seriesHeight, seriesWidth, seriesValueWidth)
+import Config.Size exposing (seriesHeight, seriesWidth, seriesValueWidth)
 
 {-- A component that display signal. For eg:
   Mouse.clicks ---------()----------()---------------> ()
