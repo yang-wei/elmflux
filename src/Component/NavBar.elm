@@ -19,10 +19,19 @@ navbar =
              , submenuLink ("#/keyboardSignal", "Keyboard")
              , submenuLink ("#/windowSignal", "Window")
              , submenuTitle "Time Signal"
-             , submenuLink ("#/timeEvery", "Time.every")
-             , submenuLink ("#/timeFps", "Time.fps")
-             , submenuLink ("#/timeFpsWhen", "Time.fpsWhen")
-             , submenuLink ("#/timeDelay", "Time.delay")
+             , submenuLink ("#/timeEvery", "every")
+             , submenuLink ("#/timeFps", "fps")
+             , submenuLink ("#/timeFpsWhen", "fpsWhen")
+             , submenuLink ("#/timeDelay", "delay")
+             , submenuLink ("#/timeSince", "since")
+             , submenuTitle "Signal Library"
+             , submenuLink ("#/signalMap", "map")
+             , submenuLink ("#/signalMap2", "map2")
+             , submenuLink ("#/signalFilter", "filter")
+             , submenuLink ("#/signalFoldp", "foldp")
+             , submenuLink ("#/signalMerge", "merge")
+             , submenuLink ("#/signalSampleOn", "sampleOn")
+             , submenuLink ("#/signalDropRepeats", "dropRepeats")
              ]
         ]
 
