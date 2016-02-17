@@ -16,6 +16,7 @@ view : Signal Element
 view =
   Extra.mapMany (flow down)
     [ keyboardEnterElement
+    , keyboardCharNote
     , isEnterAndSpacePressedElement
     ]
 
@@ -26,9 +27,9 @@ keyboardEnterElement =
   , ( Keyboard.space, "Keyboard.space : Signal Bool")
   ]
 
---keyboardCharNote : Signal Element
---keyboardCharNote =
---  signalNote "isEnterAndSpacePressed = Signal.map2 (\(s, e) -> s && e) Keyboard.space Keyboard.enter"
+keyboardCharNote : Signal Element
+keyboardCharNote =
+  signalNote "isEnterAndSpacePressed = map2 (\\(s, e) -> s && e) space enter"
 
 isBothTrue s e =
   s && e 
