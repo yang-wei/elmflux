@@ -1,4 +1,4 @@
-module Component.Note (signalNote) where
+module Component.Note (signalNote, emptySpace) where
 
 import Text
 import Graphics.Element as Element exposing (Element)
@@ -11,6 +11,10 @@ import Component.Size exposing (seriesWidth, seriesHeight, seriesValueWidth)
 signalNote : String -> Signal Element
 signalNote notes = 
   Signal.constant (toElement notes)
+
+emptySpace : Signal Element
+emptySpace =
+  Signal.constant (toElement "")
 
 toElement : String -> Element
 toElement str =
