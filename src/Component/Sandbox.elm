@@ -60,7 +60,7 @@ signalLabel name =
         displayName =
           Text.fromString name
           |> Element.leftAligned
-          |> Element.width seriesWidth
+          |> Element.width (seriesWidth + seriesValueWidth)
           |> Element.color (Color.rgb 255 255 255)
       in
         Signal.constant displayName

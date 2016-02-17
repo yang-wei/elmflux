@@ -8,20 +8,26 @@ import Time exposing (fpsWhen)
 
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
+import Component.Note exposing (signalNote)
 
 view : Signal Element
 view =
   Extra.mapMany (flow down)
-    [ isMouseDownSignal
-    , fpsWhenMouseDownSignal
+    [ isMouseDownElement
+    , fpsWhenMouseDownNote
+    , fpsWhenMouseDownElement
     ]
 
 isMouseDown = Mouse.isDown
 
-isMouseDownSignal : Signal Element
-isMouseDownSignal =
-  displaySimpleSandbox [ ( isMouseDown, "isMouseDown = Mouse.isDown") ]
+isMouseDownElement : Signal Element
+isMouseDownElement =
+  displaySimpleSandbox [ ( isMouseDown, "Mouse.isDown : Signal Bool") ]
 
-fpsWhenMouseDownSignal : Signal Element
-fpsWhenMouseDownSignal =
-  displaySimpleSandbox [ ( Time.fpsWhen 1 isMouseDown, "Time.fpsWhen 1 isMouseDown : number -> Signal Bool -> Signal Time") ]
+fpsWhenMouseDownNote : Signal Element
+fpsWhenMouseDownNote =
+  signalNote "fpsWhenMouseDown : Time.fpsWhen 1 Mouse.isDown"
+
+fpsWhenMouseDownElement : Signal Element
+fpsWhenMouseDownElement =
+  displaySimpleSandbox [ ( Time.fpsWhen 1 isMouseDown, "fpsWhenMouseDown : number -> Signal Bool -> Signal Time") ]

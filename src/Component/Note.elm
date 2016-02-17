@@ -19,7 +19,7 @@ emptySpace =
 toElement : String -> Element
 toElement str =
   let
-    totalWidth = seriesWidth
+    totalWidth = seriesWidth + seriesValueWidth
     textElement = 
       Text.fromString str
         |> Text.height 20
