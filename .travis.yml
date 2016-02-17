@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "4.1"
+script: bash ./deploy.sh
+env:
+  global:
+  - "-GH_REF": github.com/yang-wei/elmflux
+  - secure: Tfl2P2nGoYuRyxEWEX4EBKxkO2GuN7ShFHD095QM0IFnGMj+VUCySubcvFECw/rcmyg4VsMc5q+PostBch1FkO/WN51euPJnb03bnOGGlSDxPgoHySBYLEPUpX/f0EztN+obMCF3/6KdHvWiJ5nNNe9XIFiXRnuLLJwwlXoqAsTrCsZRDg0bQ1T0fw6Xf4XGWD22xD+hbREPzid7OoULkt/El7IvW04Z14PRhUs29lFd4Y/pGN6LHCoBWYxAlhXM5xbSL9fMLmquQ79aow1Grm8wpG50jNh2C38vy8ZxsU4W0n/lLrTLGW72Gbwdg4ulcBHOFJdSS64jMksyqIITg9RNz9puoCSLKJfnD6ThwlM+vliUUS+pJ3eRzgnq+6rcS4/MhQ1dSTdYuuXBjge8m7DEAet1Y5+11+mg9FFjTmn+DLNNl30vDuLghKwljeY29POnBLEnPgOAItbe4OSfqtXJW3CImE1IVMFnq90OfuKQZQYR6/QkpnnsapolAKsp16tsirnJhLuoYyw5JqJAh973+gd1/fLX9fMt2hYSBA/U3CIT9pT003bA7ri9lO0lAJjmFN0X0n9pu4NTsJI0I/ypKSMhQJ8jo4ZlcQIY+BoaX7Pqjq2ZkWz3ZtZQ2Og2OeziEkSVEwspdrU+LzUinDJA3ExvD2ZMOn4Yb56Xzlk=
