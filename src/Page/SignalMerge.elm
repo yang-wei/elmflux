@@ -20,7 +20,6 @@ view =
     , tickActionElement
     , clicksAndPressNote
     , clicksAndPressElement
-    , emptySpace
     , clickPressTickNote
     , clickPressTickElement
     ]
