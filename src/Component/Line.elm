@@ -24,8 +24,15 @@ initBox x value =
 
 delta = Signal.map Time.inSeconds (Time.fps 30)
 
-(pointWidth, pointHeight) = (20, 20)
-startPoint = negate (seriesWidth / 2)
+(pointWidth, pointHeight) = (25, 25)
+
+startPoint : Float
+startPoint =
+  negate (seriesWidth / 2)
+
+maxDisplayPoint : Int
+maxDisplayPoint =
+  seriesWidth // pointHeight
 
 objectMoveX : Float -> Form -> Form
 objectMoveX x shape =
@@ -50,6 +57,11 @@ initialSeries = []
 moveXAsTimePassed box =
   { box | x = box.x + (pointWidth * 0.2) }
 
+{-| Prevent overlapping of point to point but whole series jump =(
+-}
+moveXAsNewBoxIsAdded box =
+  { box | x = box.x + pointWidth }
+
 toStreamLine : (String -> String) -> Signal a -> Signal Element
 toStreamLine f signal =
   Signal.map view (transformIntoLine f signal)
@@ -69,8 +81,10 @@ transformIntoLine f signal=
           let
             value = f (toString a)
             newBox = initBox 0 value
+            -- move the old series forward and only display fit-screen box for perfomance reason -}
+            forwardedSeries = List.take maxDisplayPoint (List.map moveXAsNewBoxIsAdded series)
           in 
-            newBox :: series
+            newBox :: forwardedSeries
 
   in
     Signal.foldp update initialSeries action
@@ -114,8 +128,8 @@ timeAxis =
 timeAxisTick : Form
 timeAxisTick =
   let
-    axis = path [ (startPoint, 5)
-                , (startPoint, -5)
+    axis = path [ (startPoint, 10)
+                , (startPoint, -10)
                 ]
   in
     traced axisLineStyle axis
