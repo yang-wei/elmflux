@@ -16,16 +16,16 @@ view : Signal Element
 view =
   Extra.mapMany (flow down)
     [ clicksActionElement
-    , enterActionElement
+    , keyPressesElement
     , tickActionElement
-    , clicksAndEnterNote
-    , clicksAndEnterElement
+    , clicksAndPressNote
+    , clicksAndPressElement
     , emptySpace
-    , clickEnterTickNote
-    , clickEnterTickElement
+    , clickPressTickNote
+    , clickPressTickElement
     ]
 
-type Action = Click | Enter | Tick
+type Action = Click | Press | Tick
 
 clicksAction : Signal Action
 clicksAction =
@@ -35,13 +35,13 @@ clicksActionElement : Signal Element
 clicksActionElement =
   displaySimpleSandbox [ (clicksAction, "clicksAction : Signal Action")]
 
-enterAction : Signal Action
-enterAction =
-  Signal.map (always Enter) Keyboard.enter
+keyPresses : Signal Action
+keyPresses =
+  Signal.map (always Press) Keyboard.presses
 
-enterActionElement : Signal Element
-enterActionElement =
-  displaySimpleSandbox [ (enterAction, "enterAction : Signal Action")]
+keyPressesElement : Signal Element
+keyPressesElement =
+  displaySimpleSandbox [ (keyPresses, "keyPresses : Signal Action")]
 
 tickAction : Signal Action
 tickAction =
@@ -51,30 +51,30 @@ tickActionElement : Signal Element
 tickActionElement =
   displaySimpleSandbox [ (tickAction, "tickAction : Signal Action")]
 
-clicksAndEnter : Signal Action
-clicksAndEnter =
-  Signal.merge clicksAction enterAction
+clicksAndPress : Signal Action
+clicksAndPress =
+  Signal.merge clicksAction keyPresses
 
-clicksAndEnterNote : Signal Element
-clicksAndEnterNote =
-  signalNote "clicksAndEnter = Signal.merge clicksAction enterAction"
+clicksAndPressNote : Signal Element
+clicksAndPressNote =
+  signalNote "clicksAndPress = Signal.merge clicksAction keyPresses"
 
-clicksAndEnterElement : Signal Element
-clicksAndEnterElement =
-  displaySimpleSandbox [ (clicksAndEnter, "clicksAndEnter : Signal Action")]
+clicksAndPressElement : Signal Element
+clicksAndPressElement =
+  displaySimpleSandbox [ (clicksAndPress, "clicksAndPress : Signal Action")]
 
-clickEnterTick : Signal Action
-clickEnterTick =
+clickPressTick : Signal Action
+clickPressTick =
   Signal.mergeMany
     [ clicksAction
-    , enterAction
+    , keyPresses
     , tickAction
     ]
 
-clickEnterTickNote : Signal Element
-clickEnterTickNote =
-  signalNote "clickEnterTick = mergeMany [ clicksAction, enterAction, tickAction ]"
+clickPressTickNote : Signal Element
+clickPressTickNote =
+  signalNote "clickPressTick = mergeMany [ clicksAction, keyPresses, tickAction ]"
 
-clickEnterTickElement : Signal Element
-clickEnterTickElement =
-  displaySimpleSandbox [ (clickEnterTick, "clickEnterTick : Signal Action")]
+clickPressTickElement : Signal Element
+clickPressTickElement =
+  displaySimpleSandbox [ (clickPressTick, "clickPressTick : Signal Action")]
