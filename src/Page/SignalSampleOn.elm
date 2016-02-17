@@ -1,0 +1,86 @@
+module Page.SignalSampleOn (view) where 
+
+import Signal.Extra as Extra
+import Graphics.Element as Element exposing (Element, flow, down)
+
+import Keyboard
+import Mouse
+import Time
+import Char
+
+-- COMPONENT
+import Component.Sandbox exposing (displaySimpleSandbox)
+import Component.Note exposing (signalNote, emptySpace)
+
+-- VIEW
+view : Signal Element
+view =
+  Extra.mapMany (flow down)
+    [ mouseClicksElement
+    , everySecondElement
+    , clickTimeNote
+    , clickTimeElement
+    --, emptySpace
+    --, keyboardPressesElement
+    --, deltaElement
+    --, keepFiringWhenPressedNote
+    --, keepFiringWhenPressedElement
+    ]
+
+-- Click time
+mouseClicks : Signal ()
+mouseClicks =
+  Mouse.clicks
+
+mouseClicksElement : Signal Element
+mouseClicksElement =
+  displaySimpleSandbox [ (mouseClicks, "clicks : Signal ()")]
+
+everySecond : Signal Time.Time
+everySecond =
+  Time.every Time.second
+
+everySecondElement : Signal Element
+everySecondElement =
+  displaySimpleSandbox [ (everySecond, "everySecond : Signal Time.Time")]
+
+clickTime : Signal Time.Time
+clickTime = Signal.sampleOn mouseClicks everySecond
+
+clickTimeNote : Signal Element
+clickTimeNote =
+  signalNote "clickTime = Signal.sampleOn mouseClicks everySecond"
+
+clickTimeElement : Signal Element
+clickTimeElement =
+  displaySimpleSandbox [ (clickTime, "clickTime : Signal Time.Time")]
+
+
+-- Keep firing when pressed
+keyboardChar : Signal Char
+keyboardChar =
+  Signal.map Char.fromCode Keyboard.presses
+
+keyboardPressesElement : Signal Element
+keyboardPressesElement =
+  displaySimpleSandbox [ ( keyboardChar, "Keyboard.presses : Signal Char") ]
+
+delta : Signal Time.Time
+delta =
+  Time.fps 5
+
+deltaElement : Signal Element
+deltaElement =
+  displaySimpleSandbox [ ( delta, "delta : Signal Time.Time")]
+
+keepFiringWhenPressed : Signal Char
+keepFiringWhenPressed =
+  Signal.sampleOn delta keyboardChar
+
+keepFiringWhenPressedNote : Signal Element
+keepFiringWhenPressedNote =
+  signalNote "keepFiringWhenPressed = Signal.sampleOn delta keyboardChar"
+
+keepFiringWhenPressedElement : Signal Element
+keepFiringWhenPressedElement =
+  displaySimpleSandbox [ ( keepFiringWhenPressed, "keepFiringWhenPressed : Signal Char") ]
