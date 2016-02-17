@@ -13,18 +13,17 @@ import Component.Sandbox exposing (displaySimpleSandbox)
 view : Signal Element
 view =
   Extra.mapMany (flow down)
-    [ mouseClicksSignal
-    , mouseIsDownSignal
+    [ mouseClicksElement
+    , mouseIsDownElement
     ]
 
-mousePositionXSignal : Signal Element
-mousePositionXSignal =
-  displaySimpleSandbox [ ( Mouse.x, "Mouse.x : Signal Int" ) ]
+mouseClicksSignal : Signal ()
+mouseClicksSignal = Mouse.clicks
 
-mouseClicksSignal : Signal Element
-mouseClicksSignal =
-  displaySimpleSandbox [ ( Mouse.clicks, "Mouse.clicks : Signal ()" ) ]
+mouseClicksElement : Signal Element
+mouseClicksElement =
+  displaySimpleSandbox [ ( mouseClicksSignal, "Mouse.clicks : Signal ()" ) ]
 
-mouseIsDownSignal : Signal Element
-mouseIsDownSignal =
+mouseIsDownElement : Signal Element
+mouseIsDownElement =
   displaySimpleSandbox [ ( Mouse.isDown, "Mouse.isDown : Signal Bool" ) ]

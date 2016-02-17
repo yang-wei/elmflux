@@ -13,9 +13,9 @@ import Component.Sandbox exposing (displaySimpleSandbox)
 view : Signal Element
 view =
   Extra.mapMany (flow down)
-    [ windowDimensionsSignal
+    [ windowDimensionsElement
     ]
 
-windowDimensionsSignal : Signal Element
-windowDimensionsSignal =
+windowDimensionsElement : Signal Element
+windowDimensionsElement =
   displaySimpleSandbox [ ( Window.dimensions, "Window.dimensions : dimensions : Signal (Int, Int)" ) ]

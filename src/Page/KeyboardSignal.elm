@@ -13,19 +13,19 @@ import Component.Sandbox exposing (displaySimpleSandbox)
 view : Signal Element
 view =
   Extra.mapMany (flow down)
-    [ keyboardArrowsSignal
-    , keyboardWasdSignal
-    , keyboardPressesSignal
+    [ keyboardArrowsElement
+    , keyboardWasdElement
+    , keyboardPressesElement
     ]
 
-keyboardArrowsSignal : Signal Element
-keyboardArrowsSignal =
+keyboardArrowsElement : Signal Element
+keyboardArrowsElement =
   displaySimpleSandbox [ ( Keyboard.arrows, "Keyboard.arrows : Signal { x : Int, y : Int }" ) ]
 
-keyboardWasdSignal : Signal Element
-keyboardWasdSignal =
+keyboardWasdElement : Signal Element
+keyboardWasdElement =
   displaySimpleSandbox [ ( Keyboard.wasd, "Keyboard.wasd : Signal { x : Int, y : Int }") ]
 
-keyboardPressesSignal : Signal Element
-keyboardPressesSignal =
+keyboardPressesElement : Signal Element
+keyboardPressesElement =
   displaySimpleSandbox [ ( Keyboard.presses, "Keyboard.presses : Signal KeyCode") ]
