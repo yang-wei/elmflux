@@ -59,6 +59,7 @@ signalLabel name =
       let
         displayName =
           Text.fromString name
+          |> Text.typeface ["Source Code Pro", "consolas", "inconsolata", "monospace"]
           |> Element.leftAligned
           |> Element.width (seriesWidth + seriesValueWidth)
           |> Element.color (Color.rgb 255 255 255)

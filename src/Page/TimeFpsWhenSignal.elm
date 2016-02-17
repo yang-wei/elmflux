@@ -26,7 +26,7 @@ isMouseDownElement =
 
 fpsWhenMouseDownNote : Signal Element
 fpsWhenMouseDownNote =
-  signalNote "fpsWhenMouseDown : Time.fpsWhen 1 Mouse.isDown"
+  signalNote "fpsWhenMouseDown = Time.fpsWhen 1 Mouse.isDown"
 
 fpsWhenMouseDownElement : Signal Element
 fpsWhenMouseDownElement =

@@ -22,8 +22,7 @@ toElement str =
     totalWidth = seriesWidth + seriesValueWidth
     textElement = 
       Text.fromString str
-        |> Text.height 20
-        |> Text.typeface ["Source Sans Pro", "sans-serif"]
+        |> Text.typeface ["Source Code Pro", "consolas", "inconsolata", "monospace"]
         |> Element.justified
   in
     Element.container totalWidth seriesHeight Element.middle textElement
