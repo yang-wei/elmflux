@@ -37,4 +37,4 @@ navbar =
 
 navBarSignal : Signal Element
 navBarSignal = 
-  Signal.constant (toElement 150 50 navbar)
+  Signal.constant (toElement 200 600 navbar)
