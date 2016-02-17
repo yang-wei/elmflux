@@ -18,23 +18,39 @@ import Page.TimeEverySignal as TimeEverySignal
 import Page.TimeFpsSignal as TimeFpsSignal
 import Page.TimeFpsWhenSignal as TimeFpsWhenSignal
 import Page.TimeDelaySignal as TimeDelaySignal
+import Page.TimeSinceSignal as TimeSinceSignal
 
-routes : Signal Element
-routes = Signal.map2 routing hashSignal pageSignals
+-- SIGNAL LIBRARY
+import Page.SignalMap as SignalMap
+import Page.SignalMap2 as SignalMap2
 
-pageSignals =
-  (,,,,,,) <~ MouseSignal.view
-       ~ KeyboardSignal.view
-       ~ WindowSignal.view
-       ~ TimeEverySignal.view
-       ~ TimeFpsSignal.view
-       ~ TimeFpsWhenSignal.view
-       ~ TimeDelaySignal.view
+--routes : Signal Element
+routes = Signal.map4 routing hashSignal basicSignals timeSignals coreSignals
+
+basicSignals : Signal (Element, Element, Element)
+basicSignals = Extra.zip3
+                MouseSignal.view
+                KeyboardSignal.view
+                WindowSignal.view
+
+timeSignals = 
+  (,,,,) <~ TimeEverySignal.view
+          ~ TimeFpsSignal.view
+          ~ TimeFpsWhenSignal.view
+          ~ TimeDelaySignal.view
+          ~ TimeSinceSignal.view
+
+coreSignals =
+  (,) <~ SignalMap.view
+       ~ SignalMap2.view
 
 hashSignal = Signal.map (Debug.log "hash") hash
 
-routing pagePath (mouse, keyboard, window, timeEvery, timeFps, timeFpsWhen, timeDelay) =
+routing hash basic time core =
   let
+    (mouse, keyboard, window) = basic
+    (timeEvery, timeFps, timeFpsWhen, timeDelay, timeSince) = time
+    (signalMap, signalMap2) = core
     allPage =
       match [ "" :-> always mouse
             , "#/mouseSignal" :-> always mouse
@@ -44,6 +60,9 @@ routing pagePath (mouse, keyboard, window, timeEvery, timeFps, timeFpsWhen, time
             , "#/timeFpsWhen" :-> always timeFpsWhen
             , "#/timeFps" :-> always timeFps
             , "#/timeDelay" :-> always timeDelay
+            , "#/timeSince" :-> always timeSince
+            , "#/signalMap2" :-> always signalMap2
+            , "#/signalMap" :-> always signalMap
       ] (always mouse)
   in
-    allPage pagePath
+    allPage hash
