@@ -20,9 +20,11 @@ import Page.TimeFpsWhenSignal as TimeFpsWhenSignal
 import Page.TimeDelaySignal as TimeDelaySignal
 import Page.TimeSinceSignal as TimeSinceSignal
 
--- SIGNAL LIBRARY
+-- SIGNAL CORE LIBRARY
 import Page.SignalMap as SignalMap
 import Page.SignalMap2 as SignalMap2
+import Page.SignalFilter as SignalFilter
+import Page.SignalFoldp as SignalFoldp
 
 --routes : Signal Element
 routes = Signal.map4 routing hashSignal basicSignals timeSignals coreSignals
@@ -41,8 +43,10 @@ timeSignals =
           ~ TimeSinceSignal.view
 
 coreSignals =
-  (,) <~ SignalMap.view
-       ~ SignalMap2.view
+  (,,,) <~ SignalMap.view
+         ~ SignalMap2.view
+         ~ SignalFilter.view
+         ~ SignalFoldp.view
 
 hashSignal = Signal.map (Debug.log "hash") hash
 
@@ -50,7 +54,7 @@ routing hash basic time core =
   let
     (mouse, keyboard, window) = basic
     (timeEvery, timeFps, timeFpsWhen, timeDelay, timeSince) = time
-    (signalMap, signalMap2) = core
+    (map, map2, filter, foldp) = core
     allPage =
       match [ "" :-> always mouse
             , "#/mouseSignal" :-> always mouse
@@ -61,8 +65,10 @@ routing hash basic time core =
             , "#/timeFps" :-> always timeFps
             , "#/timeDelay" :-> always timeDelay
             , "#/timeSince" :-> always timeSince
-            , "#/signalMap2" :-> always signalMap2
-            , "#/signalMap" :-> always signalMap
+            , "#/signalMap2" :-> always map2
+            , "#/signalMap" :-> always map
+            , "#/signalFilter" :-> always filter
+            , "#/signalFoldp" :-> always foldp
       ] (always mouse)
   in
     allPage hash
