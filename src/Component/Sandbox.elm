@@ -28,6 +28,7 @@ signalSandbox signal f signalName =
     bottomDisplay =
       Extra.mapMany (flow right)
       [ toStreamLine f signal
+      , signalSpacer 10 seriesHeight
       , signalValue signal ]
   in
     Extra.mapMany (flow down) [ topDisplay, bottomDisplay ]
@@ -63,7 +64,12 @@ signalValue value =
       container seriesValueWidth seriesHeight middle
       (toString value
       |> Text.fromString
+      |> Text.height 20
       |> Element.justified
       |> Element.width seriesValueWidth)
   in
     Signal.map display value
+
+signalSpacer : Int -> Int -> Signal Element
+signalSpacer x y =
+  Signal.constant (Element.spacer x y)
