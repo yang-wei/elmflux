@@ -1,3 +1,5 @@
+module Main where
+
 import Router exposing (match, Route, (:->))
 
 import Signal.Extra as Extra exposing ((<~), (~))
