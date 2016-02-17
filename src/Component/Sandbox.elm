@@ -13,6 +13,7 @@ import List
 -- COMPONENT
 import Component.Line exposing (toStreamLine)
 import Config.Size exposing (seriesHeight, seriesWidth, seriesValueWidth)
+import Config.Color exposing (elmBlue)
 
 {-- A component that display signal. For eg:
   Mouse.clicks ---------()----------()---------------> ()
@@ -74,6 +75,7 @@ signalValue value =
       container seriesValueWidth seriesHeight middle
       (toString value
       |> Text.fromString
+      |> Text.color elmBlue
       |> Element.justified
       |> Element.width seriesValueWidth)
   in
