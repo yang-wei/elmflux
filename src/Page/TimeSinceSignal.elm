@@ -8,13 +8,14 @@ import Time exposing (since, second)
 
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
-
+import Component.Note exposing (signalNote)
 
 -- VIEW
 view : Signal Element
 view =
   Extra.mapMany (flow down)
     [ mouseClicksSignal
+    , timeSinceNote
     , timeSinceSignal
     ]
 
@@ -22,6 +23,10 @@ mouseClicksSignal : Signal Element
 mouseClicksSignal =
   displaySimpleSandbox [ ( Mouse.clicks, "Mouse.clicks : Signal ()" ) ]
 
+timeSinceNote : Signal Element
+timeSinceNote =
+  signalNote "twoSecondClick = Time.since (2 * second) Mouse.clicks"
+
 timeSinceSignal : Signal Element
 timeSinceSignal =
-  displaySimpleSandbox [ ( since (2 * second) Mouse.clicks, "since (2 * second) clicks : Time -> Signal a -> Signal Bool") ]
+  displaySimpleSandbox [ ( since (2 * second) Mouse.clicks, "twoSecondClick : Time -> Signal a -> Signal Bool") ]
