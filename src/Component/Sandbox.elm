@@ -23,15 +23,24 @@ import Config.Size exposing (seriesHeight, seriesWidth, seriesValueWidth)
 signalSandbox : Signal a -> (String -> String) -> String -> Signal Element
 signalSandbox signal f signalName = 
   let
+    smallHorizontalSpace = signalSpacer 10 1
+    smallVerticalSpace = signalSpacer 1 10
+    mediumHorizontalSpace = signalSpacer 15 1
     topDisplay =
-      signalLabel signalName
+      Extra.mapMany (flow right)
+      [ smallHorizontalSpace
+      , signalLabel signalName
+      ]
     bottomDisplay =
       Extra.mapMany (flow right)
-      [ toStreamLine f signal
-      , signalSpacer 10 seriesHeight
-      , signalValue signal ]
+      [ mediumHorizontalSpace
+      , toStreamLine f signal
+      , smallHorizontalSpace
+      , signalValue signal
+      , mediumHorizontalSpace
+      ]
   in
-    Extra.mapMany (flow down) [ topDisplay, bottomDisplay ]
+    Extra.mapMany (flow down) [ smallVerticalSpace, topDisplay, bottomDisplay, smallVerticalSpace ]
 
 displaySimpleSandbox signals =
   let
@@ -51,7 +60,7 @@ signalLabel name =
         displayName =
           Text.fromString name
           |> Element.leftAligned
-          |> Element.width (seriesWidth + seriesValueWidth)
+          |> Element.width seriesWidth
           |> Element.color (Color.rgb 255 255 255)
       in
         Signal.constant displayName
@@ -64,7 +73,6 @@ signalValue value =
       container seriesValueWidth seriesHeight middle
       (toString value
       |> Text.fromString
-      |> Text.height 20
       |> Element.justified
       |> Element.width seriesValueWidth)
   in
