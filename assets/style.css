@@ -20,8 +20,12 @@ div#app > div > div:nth-child(2) {
 .title {
   width: 200px;
   font-family: Signika, Helvetica, serif;
-  color: rgb(124, 124, 124);
   display: inline-block;
+}
+
+.title a {
+  color: #60B5CC;
+  text-decoration: none;
 }
 
 .subtitle {
