@@ -9,6 +9,7 @@ npm install -g elm
 elm package install --yes
 
 # build
+mkdir -p build
 elm make src/Main.elm --output build/main.js
 
 # create directory
