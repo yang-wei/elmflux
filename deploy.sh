@@ -3,7 +3,7 @@ rm -rf out || exit 0;
 
 # install elm and its dependencis
 npm --version
-node -version
+node --version
 
 npm install -g elm
 elm package install --yes
