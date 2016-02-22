@@ -27,8 +27,10 @@ delta = Signal.map Time.inSeconds (Time.fps 30)
 (pointWidth, pointHeight) = (25, 25)
 
 startPoint : Float
-startPoint =
-  negate (seriesWidth / 2)
+startPoint = seriesWidth / 2
+
+endPoint : Float
+endPoint = negate (seriesWidth / 2)
 
 maxDisplayPoint : Int
 maxDisplayPoint =
@@ -55,12 +57,12 @@ makeBox x value =
 initialSeries = []
 
 moveXAsTimePassed box =
-  { box | x = box.x + (pointWidth * 0.2) }
+  { box | x = box.x - (pointWidth * 0.2) }
 
 {-| Prevent overlapping of point to point but whole series jump =(
 -}
 moveXAsNewBoxIsAdded box =
-  { box | x = box.x + pointWidth }
+  { box | x = box.x - pointWidth }
 
 toStreamLine : (String -> String) -> Signal a -> Signal Element
 toStreamLine f signal =
@@ -121,15 +123,15 @@ timeAxisArrow =
 timeAxis : Form
 timeAxis =
   let
-    axis = path [(startPoint, 0), (seriesWidth, 0)]
+    axis = path [(endPoint, 0), (seriesWidth, 0)]
   in
     traced axisLineStyle axis
 
 timeAxisTick : Form
 timeAxisTick =
   let
-    axis = path [ (startPoint, 10)
-                , (startPoint, -10)
+    axis = path [ (endPoint, 10)
+                , (endPoint, -10)
                 ]
   in
     traced axisLineStyle axis
