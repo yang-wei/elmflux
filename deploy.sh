@@ -10,7 +10,7 @@ elm package install --yes
 
 # build
 mkdir -p build
-elm make src/Main.elm --output build/main.js
+elm make src/Main.elm --output build/main.js --yes
 
 # create directory
 mkdir -p out
