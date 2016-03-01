@@ -58,7 +58,7 @@ makeBox x value =
 initialSeries = []
 
 moveXAsTimePassed delta box =
-  { box | x = box.x - (pointWidth * 0.2 * delta / Time.inSeconds (Time.second / 30) ) }
+  { box | x = box.x - (pointWidth * 0.2 * delta * 30 ) }
 
 {-| Prevent overlapping of point to point but whole series jump =(
 -}
