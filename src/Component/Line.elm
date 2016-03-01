@@ -23,8 +23,6 @@ type alias Box = {
 initBox x value =
   Box x value
 
-delta = Signal.map Time.inSeconds AnimationFrame.frame
-
 (pointWidth, pointHeight) = (25, 25)
 
 startPoint : Float
@@ -58,7 +56,7 @@ makeBox x value =
 initialSeries = []
 
 moveXAsTimePassed delta box =
-  { box | x = box.x - (pointWidth * 0.2 * delta * 30 ) }
+  { box | x = box.x - (pointWidth * 6 * Time.inSeconds delta) }
 
 {-| Prevent overlapping of point to point but whole series jump =(
 -}
@@ -72,7 +70,7 @@ toStreamLine f signal =
 transformIntoLine f signal=
   let
     action =
-      Signal.merge (Signal.map Action signal) (Signal.map TimeSignal delta)
+      Signal.merge (Signal.map Action signal) (Signal.map TimeSignal AnimationFrame.frame)
 
     update action series =
       case action of
