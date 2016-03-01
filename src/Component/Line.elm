@@ -34,7 +34,7 @@ endPoint = negate (seriesWidth / 2)
 
 maxDisplayPoint : Int
 maxDisplayPoint =
-  seriesWidth // pointHeight
+  seriesWidth // pointWidth
 
 objectMoveX : Float -> Form -> Form
 objectMoveX x shape =
