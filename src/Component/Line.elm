@@ -2,16 +2,17 @@ module Component.Line (toStreamLine) where
 
 import Graphics.Collage exposing (..)
 import Graphics.Element exposing (..)
-import Time
+import Time exposing (Time)
 import List
 import Text
 import Mouse
+import AnimationFrame
 
 import Config.Size exposing (seriesWidth, seriesHeight)
 import Config.Color exposing (elmBlue, white)
 
 type Action a
-  = TimeSignal
+  = TimeSignal Time
   | Action a
 
 type alias Box = {
@@ -21,8 +22,6 @@ type alias Box = {
 
 initBox x value =
   Box x value
-
-delta = Signal.map Time.inSeconds (Time.fps 30)
 
 (pointWidth, pointHeight) = (25, 25)
 
@@ -56,8 +55,8 @@ makeBox x value =
 
 initialSeries = []
 
-moveXAsTimePassed box =
-  { box | x = box.x - (pointWidth * 0.2) }
+moveXAsTimePassed delta box =
+  { box | x = box.x - (pointWidth * 6 * Time.inSeconds delta) }
 
 {-| Prevent overlapping of point to point but whole series jump =(
 -}
@@ -71,12 +70,12 @@ toStreamLine f signal =
 transformIntoLine f signal=
   let
     action =
-      Signal.merge (Signal.map Action signal) (Signal.map (always TimeSignal) delta)
+      Signal.merge (Signal.map Action signal) (Signal.map TimeSignal AnimationFrame.frame)
 
     update action series =
       case action of
-        TimeSignal ->
-          List.map moveXAsTimePassed series
+        TimeSignal delta ->
+          List.map (moveXAsTimePassed delta) series
 
         {-- when new action is detected --}
         Action a   ->
