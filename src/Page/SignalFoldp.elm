@@ -7,6 +7,8 @@ import Mouse
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote)
+import Page.MouseSignal exposing (mouseClicksElement)
+import Config.Color exposing (elmBlue)
 
 -- VIEW
 view : Signal Element
@@ -17,21 +19,14 @@ view =
     , counter
     ]
 
-mouseClicksSignal : Signal ()
-mouseClicksSignal = Mouse.clicks
-
-mouseClicksElement : Signal Element
-mouseClicksElement =
-  displaySimpleSandbox [ ( mouseClicksSignal, "Mouse.clicks : Signal ()" ) ]
-
 clicksCounter : Signal Int
 clicksCounter =
-  Signal.foldp (\_ count -> count + 1) 0 mouseClicksSignal
+  Signal.foldp (\_ count -> count + 1) 0 Mouse.clicks
 
 clicksCounterNote : Signal Element
 clicksCounterNote =
-  signalNote "counter = Signal.foldp (\\_ n -> n + 1) 0 mouseClicksSignal"
+  signalNote "counter = Signal.foldp (\\_ n -> n + 1) 0 Mouse.clicks"
 
 counter : Signal Element
 counter =
-  displaySimpleSandbox [ ( clicksCounter, "counter : Signal Int" ) ]
+  displaySimpleSandbox [ ( clicksCounter, "counter : Signal Int", elmBlue ) ]

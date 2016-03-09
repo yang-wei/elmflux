@@ -1,4 +1,4 @@
-module Page.KeyboardSignal (view) where 
+module Page.KeyboardSignal (view, keyboardPressesElement) where 
 
 import Signal.Extra as Extra
 import Graphics.Element as Element exposing (Element, flow, down)
@@ -7,6 +7,7 @@ import Keyboard
 
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
+import Config.Color exposing (orange)
 
 
 -- VIEW
@@ -20,12 +21,12 @@ view =
 
 keyboardArrowsElement : Signal Element
 keyboardArrowsElement =
-  displaySimpleSandbox [ ( Keyboard.arrows, "Keyboard.arrows : Signal { x : Int, y : Int }" ) ]
+  displaySimpleSandbox [ ( Keyboard.arrows, "Keyboard.arrows : Signal { x : Int, y : Int }", orange ) ]
 
 keyboardWasdElement : Signal Element
 keyboardWasdElement =
-  displaySimpleSandbox [ ( Keyboard.wasd, "Keyboard.wasd : Signal { x : Int, y : Int }") ]
+  displaySimpleSandbox [ ( Keyboard.wasd, "Keyboard.wasd : Signal { x : Int, y : Int }", orange) ]
 
 keyboardPressesElement : Signal Element
 keyboardPressesElement =
-  displaySimpleSandbox [ ( Keyboard.presses, "Keyboard.presses : Signal KeyCode") ]
+  displaySimpleSandbox [ ( Keyboard.presses, "Keyboard.presses : Signal KeyCode", orange) ]

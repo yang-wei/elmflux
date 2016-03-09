@@ -10,6 +10,7 @@ import Time
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote, emptySpace)
+import Config.Color exposing (elmBlue, green, yellow, orange)
 
 -- VIEW
 view : Signal Element
@@ -32,7 +33,7 @@ clicksAction =
 
 clicksActionElement : Signal Element
 clicksActionElement =
-  displaySimpleSandbox [ (clicksAction, "clicksAction : Signal Action")]
+  displaySimpleSandbox [ (clicksAction, "clicksAction : Signal Action", green)]
 
 keyPresses : Signal Action
 keyPresses =
@@ -40,7 +41,7 @@ keyPresses =
 
 keyPressesElement : Signal Element
 keyPressesElement =
-  displaySimpleSandbox [ (keyPresses, "keyPresses : Signal Action")]
+  displaySimpleSandbox [ (keyPresses, "keyPresses : Signal Action", yellow)]
 
 tickAction : Signal Action
 tickAction =
@@ -48,7 +49,7 @@ tickAction =
 
 tickActionElement : Signal Element
 tickActionElement =
-  displaySimpleSandbox [ (tickAction, "tickAction : Signal Action")]
+  displaySimpleSandbox [ (tickAction, "tickAction : Signal Action", orange)]
 
 clicksAndPress : Signal Action
 clicksAndPress =
@@ -60,7 +61,7 @@ clicksAndPressNote =
 
 clicksAndPressElement : Signal Element
 clicksAndPressElement =
-  displaySimpleSandbox [ (clicksAndPress, "clicksAndPress : Signal Action")]
+  displaySimpleSandbox [ (clicksAndPress, "clicksAndPress : Signal Action", elmBlue)]
 
 clickPressTick : Signal Action
 clickPressTick =
@@ -76,4 +77,4 @@ clickPressTickNote =
 
 clickPressTickElement : Signal Element
 clickPressTickElement =
-  displaySimpleSandbox [ (clickPressTick, "clickPressTick : Signal Action")]
+  displaySimpleSandbox [ (clickPressTick, "clickPressTick : Signal Action", elmBlue)]

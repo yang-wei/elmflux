@@ -9,19 +9,17 @@ import Time exposing (since, second)
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote)
+import Page.MouseSignal exposing (mouseClicksElement)
+import Config.Color exposing (orange)
 
 -- VIEW
 view : Signal Element
 view =
   Extra.mapMany (flow down)
-    [ mouseClicksSignal
+    [ mouseClicksElement
     , timeSinceNote
     , timeSinceSignal
     ]
-
-mouseClicksSignal : Signal Element
-mouseClicksSignal =
-  displaySimpleSandbox [ ( Mouse.clicks, "Mouse.clicks : Signal ()" ) ]
 
 timeSinceNote : Signal Element
 timeSinceNote =
@@ -29,4 +27,4 @@ timeSinceNote =
 
 timeSinceSignal : Signal Element
 timeSinceSignal =
-  displaySimpleSandbox [ ( since (2 * second) Mouse.clicks, "twoSecondClick : Time -> Signal a -> Signal Bool") ]
+  displaySimpleSandbox [ ( since (2 * second) Mouse.clicks, "twoSecondClick : Time -> Signal a -> Signal Bool", orange) ]

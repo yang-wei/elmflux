@@ -8,6 +8,8 @@ import Keyboard
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote)
+import Config.Color exposing (elmBlue)
+import Page.KeyboardSignal exposing (keyboardPressesElement)
 
 -- VIEW
 view : Signal Element
@@ -17,10 +19,6 @@ view =
     , dropRepeatsPressesNote
     , dropRepeatsPressesElement
     ]
-
-keyboardPressesElement : Signal Element
-keyboardPressesElement =
-  displaySimpleSandbox [ ( Keyboard.presses, "Keyboard.presses : Signal KeyCode") ]
 
 dropRepeatsPresses : Signal Int
 dropRepeatsPresses =
@@ -32,4 +30,4 @@ dropRepeatsPressesNote =
 
 dropRepeatsPressesElement : Signal Element
 dropRepeatsPressesElement =
-  displaySimpleSandbox [ ( dropRepeatsPresses, "dropRepeatsPresses : Signal Int") ]
+  displaySimpleSandbox [ ( dropRepeatsPresses, "dropRepeatsPresses : Signal Int", elmBlue) ]

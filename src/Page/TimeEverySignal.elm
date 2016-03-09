@@ -8,6 +8,7 @@ import Time exposing (every, second)
 
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
+import Config.Color exposing (elmBlue)
 
 view : Signal Element
 view =
@@ -18,8 +19,8 @@ view =
 
 timeEverySecondSignal : Signal Element
 timeEverySecondSignal =
-  displaySimpleSandbox [ ( (every second), "every second : Time -> Signal Time") ]
+  displaySimpleSandbox [ ( (every second), "every second : Time -> Signal Time", elmBlue) ]
 
 timeEvery5SecondSignal : Signal Element
 timeEvery5SecondSignal =
-  displaySimpleSandbox [ ( every (5 * second), "every (5 * second) : Time -> Signal Time") ]
+  displaySimpleSandbox [ ( every (5 * second), "every (5 * second) : Time -> Signal Time", elmBlue) ]

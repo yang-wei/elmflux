@@ -9,18 +9,16 @@ import Time exposing (delay, second)
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote)
+import Page.MouseSignal exposing (mouseClicksElement)
+import Config.Color exposing (elmBlue)
 
 view : Signal Element
 view =
   Extra.mapMany (flow down)
-    [ mouseClicksSignal
+    [ mouseClicksElement
     , timeDelayNote
     , timeDelaySignal
     ]
-
-mouseClicksSignal : Signal Element
-mouseClicksSignal =
-  displaySimpleSandbox [ ( clicks, "Mouse.clicks : Signal ()" ) ]
 
 timeDelayNote : Signal Element
 timeDelayNote =
@@ -28,4 +26,4 @@ timeDelayNote =
 
 timeDelaySignal : Signal Element
 timeDelaySignal =
-  displaySimpleSandbox [ ( delay (second) clicks, "delayedClick : Time -> Signal a -> Signal a" ) ]
+  displaySimpleSandbox [ ( delay (second) clicks, "delayedClick : Time -> Signal a -> Signal a", elmBlue ) ]

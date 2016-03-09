@@ -7,7 +7,7 @@ import Window
 
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
-
+import Config.Color exposing (elmBlue)
 
 -- VIEW
 view : Signal Element
@@ -18,4 +18,4 @@ view =
 
 windowDimensionsElement : Signal Element
 windowDimensionsElement =
-  displaySimpleSandbox [ ( Window.dimensions, "Window.dimensions : dimensions : Signal (Int, Int)" ) ]
+  displaySimpleSandbox [ ( Window.dimensions, "Window.dimensions : dimensions : Signal (Int, Int)", elmBlue ) ]
