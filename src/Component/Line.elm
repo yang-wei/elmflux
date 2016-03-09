@@ -6,9 +6,9 @@ import Time
 import List
 import Text
 import Mouse
+import Color exposing (Color)
 
 import Config.Size exposing (seriesWidth, seriesHeight)
-import Config.Color exposing (elmBlue, white)
 
 type Action a
   = TimeSignal
@@ -41,11 +41,11 @@ objectMoveX x shape =
   moveX startPoint shape -- start from most left instead of origin
     |> moveX x
 
-makeBox : Float -> String -> Form
-makeBox x value =
+makeBox : Float -> String -> Color -> Form
+makeBox x value color =
   let
     point = oval pointWidth pointHeight
-            |> filled elmBlue
+            |> filled color
             |> objectMoveX x
     displayedValue = Text.fromString value
             |> text
@@ -64,9 +64,9 @@ moveXAsTimePassed box =
 moveXAsNewBoxIsAdded box =
   { box | x = box.x - pointWidth }
 
-toStreamLine : (String -> String) -> Signal a -> Signal Element
-toStreamLine f signal =
-  Signal.map view (transformIntoLine f signal)
+toStreamLine : Color -> (String -> String) -> Signal a -> Signal Element
+toStreamLine color f signal =
+  Signal.map (view color) (transformIntoLine f signal)
 
 transformIntoLine : (String -> String) -> Signal a -> Signal (List Box)
 transformIntoLine f signal=
@@ -94,10 +94,10 @@ transformIntoLine f signal=
 
 
 -- VIEW
-view : List Box -> Element
-view series =
+view : Color -> List Box -> Element
+view color series =
   let
-    boxes = List.map (\{x, value} -> makeBox x value) series
+    boxes = List.map (\{x, value} -> makeBox x value color) series
   in
   collage seriesWidth seriesHeight
     ([ timeAxisTick
