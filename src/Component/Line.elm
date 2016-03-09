@@ -68,6 +68,7 @@ toStreamLine : (String -> String) -> Signal a -> Signal Element
 toStreamLine f signal =
   Signal.map view (transformIntoLine f signal)
 
+transformIntoLine : (String -> String) -> Signal a -> Signal (List Box)
 transformIntoLine f signal=
   let
     action =
@@ -93,6 +94,7 @@ transformIntoLine f signal=
 
 
 -- VIEW
+view : List Box -> Element
 view series =
   let
     boxes = List.map (\{x, value} -> makeBox x value) series
