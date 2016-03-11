@@ -8,15 +8,15 @@ elmBlue =
 
 green : Color
 green =
-  rgb 121 218 39
+  rgb 130 215 54
 
 orange : Color
 orange =
-  rgb 202 142 25
+  rgb 255 105 70
 
 yellow : Color
 yellow =
-  rgb 216 213 22
+  rgb 255 203 70
 
 white : Color
 white =
