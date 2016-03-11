@@ -9,7 +9,8 @@ import Char
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote)
-
+import Config.Color exposing (elmBlue)
+import Page.KeyboardSignal exposing (keyboardPressesElement)
 
 -- VIEW
 view : Signal Element
@@ -19,10 +20,6 @@ view =
     , keyboardCharNote
     , keyboardCharElement
     ]
-
-keyboardPressesElement : Signal Element
-keyboardPressesElement =
-  displaySimpleSandbox [ ( Keyboard.presses, "Keyboard.presses : Signal KeyCode") ]
 
 keyboardCharNote : Signal Element
 keyboardCharNote =
@@ -34,4 +31,4 @@ keyboardChar =
 
 keyboardCharElement : Signal Element
 keyboardCharElement =
-  displaySimpleSandbox [ ( keyboardChar, "keyboardChar: Signal Char" ) ]
+  displaySimpleSandbox [ ( keyboardChar, "keyboardChar: Signal Char", elmBlue ) ]

@@ -9,7 +9,7 @@ import Char
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote)
-
+import Config.Color exposing (orange, elmBlue)
 
 -- VIEW
 view : Signal Element
@@ -23,8 +23,8 @@ view =
 keyboardEnterElement : Signal Element
 keyboardEnterElement =
   displaySimpleSandbox
-  [ ( Keyboard.enter, "Keyboard.enter : Signal Bool") 
-  , ( Keyboard.space, "Keyboard.space : Signal Bool")
+  [ ( Keyboard.enter, "Keyboard.enter : Signal Bool", orange) 
+  , ( Keyboard.space, "Keyboard.space : Signal Bool", orange)
   ]
 
 keyboardCharNote : Signal Element
@@ -40,4 +40,4 @@ isEnterAndSpacePressed =
 
 isEnterAndSpacePressedElement : Signal Element
 isEnterAndSpacePressedElement =
-  displaySimpleSandbox [ ( isEnterAndSpacePressed, "isEnterAndSpacePressed : Signal Bool") ]
+  displaySimpleSandbox [ ( isEnterAndSpacePressed, "isEnterAndSpacePressed : Signal Bool", elmBlue) ]

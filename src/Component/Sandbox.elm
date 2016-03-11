@@ -7,7 +7,7 @@ import Graphics.Element as Element exposing (Element, show, flow, up, down, left
 -- STYLING
 import String
 import Text
-import Color
+import Color exposing (Color)
 import List
 
 -- COMPONENT
@@ -21,8 +21,8 @@ import Config.Color exposing (elmBlue)
     name          latest value  previous value     latest value
  --}
 
-signalSandbox : Signal a -> (String -> String) -> String -> Signal Element
-signalSandbox signal f signalName = 
+signalSandbox : Signal a -> (String -> String) -> String -> Color -> Signal Element
+signalSandbox signal f signalName color = 
   let
     smallHorizontalSpace = signalSpacer 10 1
     smallVerticalSpace = signalSpacer 1 10
@@ -35,9 +35,9 @@ signalSandbox signal f signalName =
     bottomDisplay =
       Extra.mapMany (flow right)
       [ mediumHorizontalSpace
-      , toStreamLine f signal
+      , toStreamLine color f signal
       , smallHorizontalSpace
-      , signalValue signal
+      , signalValue color signal
       , mediumHorizontalSpace
       ]
   in
@@ -46,13 +46,13 @@ signalSandbox signal f signalName =
 displaySimpleSandbox signals =
   let
     sandboxes =
-      List.map (\(signal, name) -> simpleSignalSandbox signal name) signals
+      List.map (\(signal, name, color) -> simpleSignalSandbox signal name color) signals
   in
     Extra.mapMany (flow down) sandboxes
 
-simpleSignalSandbox : Signal a -> String -> Signal Element
-simpleSignalSandbox signal signalName =
-  signalSandbox signal identity signalName
+simpleSignalSandbox : Signal a -> String -> Color -> Signal Element
+simpleSignalSandbox signal signalName color =
+  signalSandbox signal identity signalName color
 
 -- For e.g: Mouse.clicks
 signalLabel : String -> Signal Element
@@ -68,14 +68,14 @@ signalLabel name =
         Signal.constant displayName
 
 -- For e.g: ()
-signalValue : Signal a -> Signal Element
-signalValue value =
+signalValue : Color -> Signal a -> Signal Element
+signalValue color value =
   let
     display value =
       container seriesValueWidth seriesHeight middle
       (toString value
       |> Text.fromString
-      |> Text.color elmBlue
+      |> Text.color color
       |> Element.justified
       |> Element.width seriesValueWidth)
   in

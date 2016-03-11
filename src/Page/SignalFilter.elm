@@ -9,7 +9,8 @@ import Char
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote)
-
+import Page.KeyboardSignal exposing (keyboardPressesElement)
+import Config.Color exposing (orange, green, elmBlue)
 
 -- VIEW
 view : Signal Element
@@ -22,10 +23,6 @@ view =
     , keyboardDigitElement
     ]
 
-keyboardPressesElement : Signal Element
-keyboardPressesElement =
-  displaySimpleSandbox [ ( Keyboard.presses, "Keyboard.presses : Signal KeyCode") ]
-
 keyboardCharNote : Signal Element
 keyboardCharNote =
   signalNote "keyboardChar = Signal.map Char.fromCode Keyboard.presses"
@@ -36,7 +33,7 @@ keyboardChar =
 
 keyboardCharElement : Signal Element
 keyboardCharElement =
-  displaySimpleSandbox [ ( keyboardChar, "keyboardChar: Signal Char" ) ]
+  displaySimpleSandbox [ ( keyboardChar, "keyboardChar: Signal Char", orange ) ]
 
 keyboardDigit : Signal Char
 keyboardDigit =
@@ -48,4 +45,4 @@ keyboardDigitNote =
 
 keyboardDigitElement : Signal Element
 keyboardDigitElement =
-  displaySimpleSandbox [ (keyboardDigit, "keyboardDigit : Signal Bool")]
+  displaySimpleSandbox [ (keyboardDigit, "keyboardDigit : Signal Bool", elmBlue)]

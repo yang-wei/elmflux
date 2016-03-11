@@ -11,6 +11,8 @@ import Char
 -- COMPONENT
 import Component.Sandbox exposing (displaySimpleSandbox)
 import Component.Note exposing (signalNote, emptySpace)
+import Page.MouseSignal exposing (mouseClicksElement)
+import Config.Color exposing (elmBlue)
 
 -- VIEW
 view : Signal Element
@@ -27,25 +29,16 @@ view =
     --, keepFiringWhenPressedElement
     ]
 
--- Click time
-mouseClicks : Signal ()
-mouseClicks =
-  Mouse.clicks
-
-mouseClicksElement : Signal Element
-mouseClicksElement =
-  displaySimpleSandbox [ (mouseClicks, "clicks : Signal ()")]
-
 everySecond : Signal Time.Time
 everySecond =
   Time.every Time.second
 
 everySecondElement : Signal Element
 everySecondElement =
-  displaySimpleSandbox [ (everySecond, "everySecond : Signal Time.Time")]
+  displaySimpleSandbox [ (everySecond, "everySecond : Signal Time.Time", elmBlue)]
 
 clickTime : Signal Time.Time
-clickTime = Signal.sampleOn mouseClicks everySecond
+clickTime = Signal.sampleOn Mouse.clicks everySecond
 
 clickTimeNote : Signal Element
 clickTimeNote =
@@ -53,9 +46,9 @@ clickTimeNote =
 
 clickTimeElement : Signal Element
 clickTimeElement =
-  displaySimpleSandbox [ (clickTime, "clickTime : Signal Time.Time")]
+  displaySimpleSandbox [ (clickTime, "clickTime : Signal Time.Time", elmBlue)]
 
-
+{-
 -- Keep firing when pressed
 keyboardChar : Signal Char
 keyboardChar =
@@ -84,3 +77,4 @@ keepFiringWhenPressedNote =
 keepFiringWhenPressedElement : Signal Element
 keepFiringWhenPressedElement =
   displaySimpleSandbox [ ( keepFiringWhenPressed, "keepFiringWhenPressed : Signal Char") ]
+-}
