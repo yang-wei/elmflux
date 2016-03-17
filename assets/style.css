@@ -1,0 +1,77 @@
+body {
+  background-color: rgb(216, 221, 225);
+  font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
+  color: #293c4b;
+}
+
+.container {
+  width: 960px;
+  margin: auto;
+}
+
+/* The signal container */
+div#app > div > div:nth-child(2) {
+  box-shadow: 0px 1px 4px 1px #E2E2E2;
+  background: white;
+  border-top: 3px solid #60B5CC;
+  padding-top: 25px !important;
+}
+
+.title {
+  width: 200px;
+  font-family: Signika, Helvetica, serif;
+  display: inline-block;
+}
+
+.title a {
+  color: #60B5CC;
+  text-decoration: none;
+}
+
+.subtitle {
+  width: 600px;
+  font-family: Signika, Helvetica, serif;
+  color: rgb(124, 124, 124);
+  display: inline;
+}
+
+ul.signals-menu {
+  list-style-type: none;
+  height: 100%;
+  overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+}
+
+ul.signals-menu li {
+  color: rgb(124, 124, 124);
+  font-size: 1rem;
+  line-height: 1.3rem;
+}
+
+li.submenu-title {
+  text-transform: uppercase;
+  font-size: 0.7em;
+  color: rgb(167, 167, 167);
+  margin-top: 20px;
+}
+
+li.submenu-title:first-child {
+  margin-top: 0px;
+}
+
+.signals-menu > li > a {
+  position: relative;
+  display: block;
+  color: rgb(124, 124, 124);
+}
+
+footer {
+  position: fixed;
+  bottom: 2px;
+  right: 15px;
+}
+
+.footnote a {
+  color: #60B5CC;
+}
