@@ -6,6 +6,7 @@ import Time exposing (Time)
 import List
 import Text
 import Mouse
+import Color exposing (Color)
 import AnimationFrame
 
 import Config.Size exposing (seriesWidth, seriesHeight)
