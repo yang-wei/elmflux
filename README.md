@@ -4,7 +4,7 @@
 
 ![](https://cldup.com/xxMHJ6fkox.gif)
 
-Like the diagram above, Elmflux is a web app that visualizing **Signal** in Elm. If you do not know anything about Signal then you can read it on [my blog](http://yang-wei.github.io/blog/2016/02/04/a-step-to-step-guide-to-elm-signal/). Elmflux is inspired by [rxmarbles](https://github.com/staltz/rxmarbles) which visualizes Rx operators.
+Like the diagram above, Elmflux is a web app that visualizing **Signal** in Elm. If you do not know anything about Signal then you can read it on [my blog](https://yang-wei.github.io/post/2016/02/04/a-step-to-step-guide-to-elm-signal/). Elmflux is inspired by [rxmarbles](https://github.com/staltz/rxmarbles) which visualizes Rx operators.
 
 ### How to use ?
 For some signals, you have to move your mouse, type using your keyboard or resizing browser. You probably can guess what to do when you see the signal name.
